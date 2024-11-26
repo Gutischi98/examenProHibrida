@@ -1,0 +1,34 @@
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let publicacion of publicaciones">
+      <ion-label>
+        <h2>{{ publicacion.titulo }}</h2>
+        <p>{{ publicacion.fecha | formatoFecha }}</p>
+      </ion-label>
+      <ion-button fill="clear" color="danger" (click)="confirmarEliminacion(publicacion)">
+        <p>ELIMINAR</p>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/crear-publicacion">
+      <p>NUEVO</p>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-modal [isOpen]="mostrarModal" (didDismiss)="cerrarModal()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Confirmar</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <p>¿Estás seguro de que deseas eliminar esta publicación?</p>
+      <ion-button color="danger" (click)="eliminarPublicacion()">Eliminar</ion-button>
+      <ion-button (click)="cerrarModal()">Cancelar</ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>
